@@ -1,7 +1,7 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
 
 export default defineConfig({
   plugins: [react()],
-  base: 'https://github.com/gonnect-stream/dashboard' // ← nome do repositório
+  base: '/', // ← importante para Netlify (não use base relativa como no GitHub Pages)
 });
