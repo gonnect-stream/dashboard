@@ -19,7 +19,7 @@ export default function Login() {
     try {
       const res = await api.post('/login', { email, password });
       console.log('Login bem-sucedido:', res.data);
-      navigate('/dashboard', { replace: true }); // Redireciona
+      // navigate('/dashboard', { replace: true }); // Redireciona
     } catch (err) {
       setError(err.response?.data?.error || 'Erro ao fazer login');
     } finally {
