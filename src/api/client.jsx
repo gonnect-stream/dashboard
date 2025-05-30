@@ -2,8 +2,8 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'http://localhost:3000',
-  withCredentials: true // ← ESSENCIAL para manipular cookies
+  baseURL: 'https://backend-production-5486.up.railway.app/',
+  withCredentials: true // ← permite uso de cookies
 });
 
 export default api;
