@@ -5,7 +5,7 @@ import ProtectedRoute from './components/ProtectedRoute';
 
 export default function App() {
   return (
-    <HashRouter>
+    <BrowserRouter>
       <Routes>
         <Route path="/" element={<Login />} />
         <Route
@@ -17,6 +17,6 @@ export default function App() {
           }
         />
       </Routes>
-    </HashRouter>
+    </BrowserRouter>
   );
 }
