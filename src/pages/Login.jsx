@@ -15,11 +15,6 @@ export default function Login() {
     setError("");
 
     try {
-      if (email || password === "") {
-        setError("O campo de email ou senha não contém informação");
-
-        return;
-      }
       const res = await api.post("/login", { email, password });
       console.log("Login bem-sucedido:", res.data);
       navigate("/dashboard", { replace: true }); // Redireciona
@@ -96,6 +91,17 @@ export default function Login() {
                 </div>
               </div>
 
+              <div className="flex items-center justify-between">
+                <div className="text-sm/6">
+                  <Link
+                    to="/forgot-password"
+                    className="font-semibold text-red-600 hover:text-red-500"
+                  >
+                    Esqueceu sua senha?
+                  </Link>
+                </div>
+              </div>
+
               <div>
                 <button
                   onClick={handleLogin}
@@ -111,17 +117,6 @@ export default function Login() {
             {error && (
               <p className="mt-4 text-center text-sm text-gray-700">{error}</p>
             )}
-
-            <div className="flex items-center justify-between mt-5">
-              <div className="text-sm/6">
-                <Link
-                  to="/forgot-password"
-                  className="font-semibold text-red-600 hover:text-red-500"
-                >
-                  Esqueceu sua senha?
-                </Link>
-              </div>
-            </div>
           </div>
         </div>
       </div>
