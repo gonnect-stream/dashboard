@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import api from "../api/client";
 
 export default function ForgotPassword() {
@@ -70,9 +71,22 @@ export default function ForgotPassword() {
                 </p>
               )}
             </form>
-          </div>
 
-          <div className="flex items-center justify-between"></div>
+            
+
+
+
+          <div className="flex items-center justify-between mt-5">
+                <div className="text-sm/6">
+                  <Link
+                    to="/"
+                    className="font-semibold text-red-600 hover:text-red-500"
+                  >
+                    Retornar ao login
+                  </Link>
+                </div>
+              </div>
+          </div>
         </div>
       </div>
     </>
