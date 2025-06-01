@@ -13,7 +13,7 @@ export default function ForgotPassword() {
 
     try {
       const res = await api.post("/forgot-password", { email });
-      setStatus("Verifique seu e-mail para redefinir a senha.");
+      setStatus("Enviamos um email com link de recuperação, confira seu email.");
     } catch (err) {
       setStatus("Erro ao enviar e-mail de recuperação.");
     }
@@ -28,18 +28,21 @@ export default function ForgotPassword() {
             src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=red&shade=600"
             className="mx-auto h-10 w-auto"
           />
-          <h2 className="mt-6 text-center text-2xl/9 font-bold tracking-tight text-gray-900">
+          <h2 className="mt-6 text-center text-2xl/9 font-bold tracking-tight text-gray-100">
             Recupere sua senha
           </h2>
+          <p className="mt-2 text-center font-extralight tracking-tight text-gray-100">
+            Digite seu email que enviaremos um link para recuperar seu acesso.
+          </p>
         </div>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-[480px]">
-          <div className="bg-white px-6 py-12 shadow-sm sm:rounded-lg sm:px-12">
-            <form onSubmit={handleSubmit} className="space-y-4">
+          <div className="bg-zinc-900 px-6 py-12 shadow-sm sm:rounded-lg sm:px-12">
+            <form onSubmit={handleSubmit} className="space-y-4 ">
               <div>
                 <label
                   htmlFor="email"
-                  className="block text-sm/6 font-medium text-gray-900"
+                  className="block text-sm/6 font-light text-gray-100"
                 >
                   Email:
                 </label>
@@ -66,7 +69,7 @@ export default function ForgotPassword() {
               </button>
 
               {status && (
-                <p className="mt-4 text-center text-sm text-gray-700">
+                <p className="mt-4 text-center text-sm text-gray-100">
                   {status}
                 </p>
               )}

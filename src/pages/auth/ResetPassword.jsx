@@ -51,18 +51,23 @@ export default function ResetPassword() {
             src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=red&shade=600"
             className="mx-auto h-10 w-auto"
           />
-          <h2 className="mt-6 text-center text-2xl/9 font-bold tracking-tight text-gray-900">
+          <h2 className="mt-6 text-center text-2xl/9 font-bold tracking-tight text-gray-100">
             Redefina sua senha
           </h2>
+          
+           <p className="mt-2 text-center  font-light tracking-tight text-gray-100">
+            Digite sua nova senha no campo abaixo
+          </p>
+
         </div>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-[480px]">
-          <div className="bg-white px-6 py-12 shadow-sm sm:rounded-lg sm:px-12">
+          <div className="bg-zinc-900 px-6 py-12 shadow-sm sm:rounded-lg sm:px-12">
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
                 <label
                   htmlFor="email"
-                  className="block text-sm/6 font-medium text-gray-900"
+                  className="block text-sm/6 font-light text-gray-100"
                 >
                   Email:
                 </label>
@@ -86,7 +91,7 @@ export default function ResetPassword() {
               </button>
 
               {status && (
-                <p className="mt-4 text-center text-sm text-gray-700">
+                <p className="mt-4 text-center text-sm text-gray-100">
                   {status}
                 </p>
               )}
