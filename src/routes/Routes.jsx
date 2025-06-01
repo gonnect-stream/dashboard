@@ -6,6 +6,7 @@ import ForgotPassword from "@/pages/auth/ForgotPassword";
 // import Dashboard from "@/pages/app/Dashboard";
 import ApplicationLayout from "@/pages/app/Layout";
 import ProtectedRoute from "@/components/ProtectedRoute";
+import Events from "@/pages/app/events";
 
 export default function AppRoutes() {
   return (
@@ -21,7 +22,10 @@ export default function AppRoutes() {
             <ApplicationLayout />
           </ProtectedRoute>
         }
-      ></Route>
+      >
+
+        <Route path="/dashboard/events" element={<Events />} />
+      </Route>
     </Routes>
   );
 }

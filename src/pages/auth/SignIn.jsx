@@ -32,25 +32,29 @@ export default function SignIn() {
 
   return (
     <>
-      <div className="flex min-h-full flex-1 flex-col justify-center py-12 sm:px-6 lg:px-8 ">
+      <div className="flex min-h-full flex-1 flex-col justify-center py-12 sm:px-6 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-md">
           <img
             alt="Gonnect"
             src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=red&shade=600"
             className="mx-auto h-10 w-auto"
           />
-          <h2 className="mt-6 text-center text-2xl/9 font-bold tracking-tight text-gray-900">
+          <h2 className="mt-6 text-center text-2xl/9 font-bold tracking-tight text-gray-100">
             Acesse sua conta
           </h2>
+
+          <p className="mt-2 text-center  font-light tracking-tight text-gray-100">
+            Plataforma de gerenciamento de streams
+          </p>
         </div>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-[480px]">
-          <div className="bg-white px-6 py-12 shadow-sm sm:rounded-lg sm:px-12">
-            <form action="#" method="POST" className="space-y-6">
+          <div className="bg-zinc-900 px-6 py-12 shadow-sm sm:rounded-lg sm:px-12">
+            <form className="space-y-6">
               <div>
                 <label
                   htmlFor="email"
-                  className="block text-sm/6 font-medium text-gray-900"
+                  className="block text-sm/6 font-light text-gray-100"
                 >
                   Email:
                 </label>
@@ -72,7 +76,7 @@ export default function SignIn() {
               <div>
                 <label
                   htmlFor="password"
-                  className="block text-sm/6 font-medium text-gray-900"
+                  className="block text-sm/6 font-light text-gray-100"
                 >
                   Senha
                 </label>

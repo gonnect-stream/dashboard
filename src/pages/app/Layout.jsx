@@ -270,7 +270,7 @@ export default function ApplicationLayout({}) {
               <SidebarHeading>Controle de eventos</SidebarHeading>
 
               <Link
-                to="/dashboard"
+                to="/dashboard/events"
                 className={clsx(
                   "flex items-center  gap-3 hover:bg-gray-100/10 w-full pl-2 py-2 rounded-lg",
                   location.pathname === "/dashboard/events"
