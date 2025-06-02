@@ -275,7 +275,7 @@ export default function ApplicationLayout({}) {
                   "flex items-center  gap-3 hover:bg-gray-100/10 w-full pl-2 py-2 rounded-lg",
                   location.pathname === "/dashboard/events"
                     ? "border-l-4 border-red-500 text-white"
-                    : "border-l-4 border-transparent hover:bg-gray-50 text-white/50"
+                    : "border-l-4 border-transparent hover:bg-gray-100/10 hover:text-white text-white/50 "
                 )}
               >
                 <HomeIcon className="h-5 w-5" />
@@ -290,7 +290,7 @@ export default function ApplicationLayout({}) {
                   "flex items-center  gap-3 hover:bg-gray-100/10 w-full pl-2 py-2 rounded-lg",
                   location.pathname === "/dashboard/input-stream"
                     ? "border-l-4 border-red-500 text-white"
-                    : "border-l-4 border-transparent hover:bg-gray-50 text-white/50"
+                    : "border-l-4 border-transparent hover:bg-gray-100/10 hover:text-white text-white/50 "
                 )}
               >
                 <HomeIcon className="h-5 w-5" />
@@ -305,7 +305,7 @@ export default function ApplicationLayout({}) {
                   "flex items-center  gap-3 hover:bg-gray-100/10 w-full pl-2 py-2 rounded-lg",
                   location.pathname === "/dashboard/re-stream"
                     ? "border-l-4 border-red-500 text-white"
-                    : "border-l-4 border-transparent hover:bg-gray-50 text-white/50"
+                    : "border-l-4 border-transparent hover:bg-gray-100/10 hover:text-white text-white/50 "
                 )}
               >
                 <HomeIcon className="h-5 w-5" />
@@ -320,12 +320,47 @@ export default function ApplicationLayout({}) {
                   "flex items-center  gap-3 hover:bg-gray-100/10 w-full pl-2 py-2 rounded-lg",
                   location.pathname === "/dashboard/ondemand"
                     ? "border-l-4 border-red-500 text-white"
-                    : "border-l-4 border-transparent hover:bg-gray-50 text-white/50"
+                    : "border-l-4 border-transparent hover:bg-gray-100/10 hover:text-white text-white/50 "
                 )}
               >
                 <HomeIcon className="h-5 w-5" />
                 <SidebarLabel className=" text-sm font-light">
                   Video ON DEMAND
+                </SidebarLabel>
+              </Link>
+            </SidebarSection>
+
+            {/* Controle de usuários */}
+            <SidebarSection>
+              <SidebarHeading>Usuários</SidebarHeading>
+
+              <Link
+                to="/dashboard/profile"
+                className={clsx(
+                  "flex items-center  gap-3 hover:bg-gray-100/10 w-full pl-2 py-2 rounded-lg",
+                  location.pathname === "/dashboard/profile"
+                    ? "border-l-4 border-red-500 text-white"
+                    : "border-l-4 border-transparent hover:bg-gray-100/10 hover:text-white text-white/50 "
+                )}
+              >
+                <HomeIcon className="h-5 w-5" />
+                <SidebarLabel className=" text-sm font-light">
+                  Meu perfil
+                </SidebarLabel>
+              </Link>
+
+              <Link
+                to="/dashboard/#"
+                className={clsx(
+                  "flex items-center  gap-3 hover:bg-gray-100/10 w-full pl-2 py-2 rounded-lg",
+                  location.pathname === "/dashboard/users"
+                    ? "border-l-4 border-red-500 text-white"
+                    : "border-l-4 border-transparent hover:bg-gray-100/10 hover:text-white text-white/50 "
+                )}
+              >
+                <HomeIcon className="h-5 w-5" />
+                <SidebarLabel className=" text-sm font-light">
+                  Usuários
                 </SidebarLabel>
               </Link>
             </SidebarSection>

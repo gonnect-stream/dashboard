@@ -1,12 +1,41 @@
-import { Stat } from '@/app/stat'
-import { Avatar } from '@/components/avatar'
-import { Heading, Subheading } from '@/components/heading'
-import { Select } from '@/components/select'
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/table'
-import { getRecentOrders } from '@/data'
+import { Stat } from "@/pages/app/stat";
+import { useEffect, useState } from "react";
+import { Avatar } from "@/components/avatar";
+import { Heading, Subheading } from "@/components/heading";
+import { Select } from "@headlessui/react";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/table";
 
-export default async function Home() {
-  let orders = await getRecentOrders()
+import { getRecentOrders } from "@/data";
+
+export default function Home() {
+  const [orders, setOrders] = useState([]);
+  const [erro, setErro] = useState(null);
+
+  useEffect(() => {
+    const carregarPedidos = async () => {
+      try {
+        const dados = await getRecentOrders();
+        setOrders(dados);
+      } catch (err) {
+        console.error("Erro ao buscar pedidos:", err);
+        setErro("Erro ao carregar pedidos");
+      }
+    };
+
+    carregarPedidos();
+  }, []);
+
+  // console.log(orders[0].event.imgUrl)
+
+  if (erro) return <div>{erro}</div>;
+  if (!orders.length) return <div>Carregando pedidos...</div>;
 
   return (
     <>
@@ -14,7 +43,11 @@ export default async function Home() {
       <div className="mt-8 flex items-end justify-between">
         <Subheading>Overview</Subheading>
         <div>
-          <Select name="period">
+          <Select
+            className={
+              "w-full text-sm bg-zinc-800 border border-zinc-500 border-0.5 text-zinc-400 px-5 py-2 pr-2 rounded-lg focus:outline-none focus:ring-0 focus:border-transparent"
+            }
+          >
             <option value="last_week">Last week</option>
             <option value="last_two">Last two weeks</option>
             <option value="last_month">Last month</option>
@@ -28,6 +61,7 @@ export default async function Home() {
         <Stat title="Tickets sold" value="5,888" change="+4.5%" />
         <Stat title="Pageviews" value="823,067" change="+21.2%" />
       </div>
+
       <Subheading className="mt-14">Recent orders</Subheading>
       <Table className="mt-4 [--gutter:--spacing(6)] lg:[--gutter:--spacing(10)]">
         <TableHead>
@@ -41,7 +75,10 @@ export default async function Home() {
         </TableHead>
         <TableBody>
           {orders.map((order) => (
-            <TableRow key={order.id} href={order.url} title={`Order #${order.id}`}>
+            <TableRow
+              key={order.id}
+              title={`Order #${order.id}`}
+            >
               <TableCell>{order.id}</TableCell>
               <TableCell className="text-zinc-500">{order.date}</TableCell>
               <TableCell>{order.customer.name}</TableCell>
@@ -57,5 +94,7 @@ export default async function Home() {
         </TableBody>
       </Table>
     </>
-  )
+
+    // <h1>VEM COMIGO</h1>
+  );
 }

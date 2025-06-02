@@ -13,7 +13,7 @@ export default function ForgotPassword() {
 
     try {
       const res = await api.post("/forgot-password", { email });
-      setStatus("Enviamos um email com link de recuperação, confira seu email.");
+      setStatus("Enviamos um email com link de recuperação, confira seu emailnpm .");
     } catch (err) {
       setStatus("Erro ao enviar e-mail de recuperação.");
     }

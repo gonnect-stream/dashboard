@@ -3,6 +3,9 @@ import clsx from 'clsx'
 import { forwardRef } from 'react'
 
 export const Select = forwardRef(function Select({ className, multiple, ...props }, ref) {
+
+  console.log(props)
+
   return (
     <span
       data-slot="control"
