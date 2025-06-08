@@ -49,7 +49,9 @@ import {
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
 import { Outlet, useLocation, Link, useNavigate } from "react-router-dom";
 
-import erica from "../../users/erica.jpg";
+import Breadcrumbs from "@/components/breadcrumbs";
+
+// import erica from "@/erica.jpg";
 import clsx from "clsx";
 import { useEffect, useState } from "react";
 import api from "../../api/client";
@@ -136,7 +138,7 @@ export default function ApplicationLayout({}) {
                     <UserCircleIcon className="w-12 aspect-square text-gray-100" />
                   ) : (
                     <Avatar
-                      src={erica}
+                      // src={erica}
                       className="w-12 aspect-square"
                       alt="Foto de perfil"
                     />
@@ -151,104 +153,6 @@ export default function ApplicationLayout({}) {
                   </span>
                 </span>
               </div>
-
-              <MenuItems
-                transition
-                className="absolute right-0 z-10 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black/5 transition focus:outline-hidden data-closed:scale-95 data-closed:transform data-closed:opacity-0 data-enter:duration-100 data-enter:ease-out data-leave:duration-75 data-leave:ease-in"
-              >
-                <div className="py-1">
-                  <MenuItem className="group">
-                    <a
-                      href="#"
-                      className="group flex items-center px-4 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:text-gray-900 data-focus:outline-hidden"
-                    >
-                      <PencilSquareIcon
-                        aria-hidden="true"
-                        className="mr-3 size-5 text-gray-400 group-data-focus:text-gray-500"
-                      />
-                      Edit
-                    </a>
-                  </MenuItem>
-                  <MenuItem className="group">
-                    <a
-                      href="#"
-                      className="group flex items-center px-4 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:text-gray-900 data-focus:outline-hidden"
-                    >
-                      <DocumentDuplicateIcon
-                        aria-hidden="true"
-                        className="mr-3 size-5 text-gray-400 group-data-focus:text-gray-500"
-                      />
-                      Duplicate
-                    </a>
-                  </MenuItem>
-                </div>
-                <div className="py-1">
-                  <MenuItem className="group">
-                    <a
-                      href="#"
-                      className="group flex items-center px-4 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:text-gray-900 data-focus:outline-hidden"
-                    >
-                      <ArchiveBoxIcon
-                        aria-hidden="true"
-                        className="mr-3 size-5 text-gray-400 group-data-focus:text-gray-500"
-                      />
-                      Archive
-                    </a>
-                  </MenuItem>
-                  <MenuItem className="group">
-                    <a
-                      href="#"
-                      className="group flex items-center px-4 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:text-gray-900 data-focus:outline-hidden"
-                    >
-                      <ArrowRightCircleIcon
-                        aria-hidden="true"
-                        className="mr-3 size-5 text-gray-400 group-data-focus:text-gray-500"
-                      />
-                      Move
-                    </a>
-                  </MenuItem>
-                </div>
-                <div className="py-1">
-                  <MenuItem className="group">
-                    <a
-                      href="#"
-                      className="group flex items-center px-4 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:text-gray-900 data-focus:outline-hidden"
-                    >
-                      <UserPlusIcon
-                        aria-hidden="true"
-                        className="mr-3 size-5 text-gray-400 group-data-focus:text-gray-500"
-                      />
-                      Share
-                    </a>
-                  </MenuItem>
-                  <MenuItem className="group">
-                    <a
-                      href="#"
-                      className="group flex items-center px-4 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:text-gray-900 data-focus:outline-hidden"
-                    >
-                      <HeartIcon
-                        aria-hidden="true"
-                        className="mr-3 size-5 text-gray-400 group-data-focus:text-gray-500"
-                      />
-                      Add to favorites
-                    </a>
-                  </MenuItem>
-                </div>
-                <div className="py-1">
-                  <MenuItem className="group">
-                    <a
-                      href="#"
-                      className="group flex items-center px-4 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:text-gray-900 data-focus:outline-hidden"
-                    >
-                      <TrashIcon
-                        aria-hidden="true"
-                        className="mr-3 size-5 text-gray-400 group-data-focus:text-gray-500"
-                      />
-                      Delete
-                    </a>
-                  </MenuItem>
-                </div>
-              </MenuItems>
             </Menu>
           </SidebarHeader>
 
@@ -259,7 +163,7 @@ export default function ApplicationLayout({}) {
                 "flex items-center text-white gap-3 hover:bg-gray-100/10 w-full pl-2 py-2 rounded-lg mb-5",
                 location.pathname === "/dashboard/"
                   ? "border-l-4 border-red-500"
-                  : "border-l-4 border-transparent hover:bg-gray-50"
+                  : "border-l-4 border-transparent hover:bg-gray-100/10 hover:text-white text-white/50 "
               )}
             >
               <HomeIcon className="h-5 w-5" />
@@ -270,10 +174,10 @@ export default function ApplicationLayout({}) {
               <SidebarHeading>Controle de eventos</SidebarHeading>
 
               <Link
-                to="/dashboard/events"
+                to="/dashboard/eventos"
                 className={clsx(
                   "flex items-center  gap-3 hover:bg-gray-100/10 w-full pl-2 py-2 rounded-lg",
-                  location.pathname === "/dashboard/events"
+                  location.pathname === "/dashboard/eventos"
                     ? "border-l-4 border-red-500 text-white"
                     : "border-l-4 border-transparent hover:bg-gray-100/10 hover:text-white text-white/50 "
                 )}
@@ -335,10 +239,10 @@ export default function ApplicationLayout({}) {
               <SidebarHeading>Usuários</SidebarHeading>
 
               <Link
-                to="/dashboard/profile"
+                to="/dashboard/Perfil"
                 className={clsx(
                   "flex items-center  gap-3 hover:bg-gray-100/10 w-full pl-2 py-2 rounded-lg",
-                  location.pathname === "/dashboard/profile"
+                  location.pathname === "/dashboard/Perfil"
                     ? "border-l-4 border-red-500 text-white"
                     : "border-l-4 border-transparent hover:bg-gray-100/10 hover:text-white text-white/50 "
                 )}
@@ -350,10 +254,10 @@ export default function ApplicationLayout({}) {
               </Link>
 
               <Link
-                to="/dashboard/#"
+                to="/dashboard/usuarios"
                 className={clsx(
                   "flex items-center  gap-3 hover:bg-gray-100/10 w-full pl-2 py-2 rounded-lg",
-                  location.pathname === "/dashboard/users"
+                  location.pathname === "/dashboard/usuarios"
                     ? "border-l-4 border-red-500 text-white"
                     : "border-l-4 border-transparent hover:bg-gray-100/10 hover:text-white text-white/50 "
                 )}
@@ -386,6 +290,7 @@ export default function ApplicationLayout({}) {
         </Sidebar>
       }
     >
+      <Breadcrumbs />
       <Outlet />
     </SidebarLayout>
   );

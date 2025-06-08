@@ -7,7 +7,9 @@ import ApplicationLayout from "@/pages/app/Layout";
 import ProtectedRoute from "@/components/ProtectedRoute";
 import Events from "@/pages/app/events";
 import Profile from "@/pages/app/user/Profile";
-import Home from "@/pages/app/Home.jsx"
+import Home from "@/pages/app/Home.jsx";
+import Users from "@/pages/app/user/Users.jsx";
+import PageNotFound from "@/pages/page-not-found.jsx";
 
 export default function AppRoutes() {
   return (
@@ -25,9 +27,13 @@ export default function AppRoutes() {
         }
       >
         <Route path="/dashboard/" element={<Home />} />
-        <Route path="/dashboard/events" element={<Events />} />
-        <Route path="/dashboard/profile" element={<Profile />} />
+        <Route path="/dashboard/eventos" element={<Events />} />
+        <Route path="/dashboard/perfil" element={<Profile />} />
+        <Route path="/dashboard/usuarios" element={<Users />} />
       </Route>
+
+
+        <Route path="*" element={<PageNotFound />} />
     </Routes>
   );
 }

@@ -39,48 +39,33 @@ export default function Home() {
 
   return (
     <>
-      <Heading>Good afternoon, Erica</Heading>
+      <Heading>Olá, nome do usuário</Heading>
       <div className="mt-8 flex items-end justify-between">
-        <Subheading>Overview</Subheading>
-        <div>
-          <Select
-            className={
-              "w-full text-sm bg-zinc-800 border border-zinc-500 border-0.5 text-zinc-400 px-5 py-2 pr-2 rounded-lg focus:outline-none focus:ring-0 focus:border-transparent"
-            }
-          >
-            <option value="last_week">Last week</option>
-            <option value="last_two">Last two weeks</option>
-            <option value="last_month">Last month</option>
-            <option value="last_quarter">Last quarter</option>
-          </Select>
-        </div>
+        <Subheading>Resumo da plataforma</Subheading>
       </div>
       <div className="mt-4 grid gap-8 sm:grid-cols-2 xl:grid-cols-4">
-        <Stat title="Total revenue" value="$2.6M" change="+4.5%" />
-        <Stat title="Average order value" value="$455" change="-0.5%" />
-        <Stat title="Tickets sold" value="5,888" change="+4.5%" />
-        <Stat title="Pageviews" value="823,067" change="+21.2%" />
+        <Stat title="Transmissões hoje" value="10" change="Ao vivo" />
+        <Stat title="Total de transmissões" value="250" change="Plataforma" />
+        <Stat title="Total de VOD" value="350" change="VOD%" />
       </div>
 
-      <Subheading className="mt-14">Recent orders</Subheading>
+      <Subheading className="mt-14">
+        Transmissões programadas para hoje
+      </Subheading>
       <Table className="mt-4 [--gutter:--spacing(6)] lg:[--gutter:--spacing(10)]">
         <TableHead>
           <TableRow>
-            <TableHeader>Order number</TableHeader>
-            <TableHeader>Purchase date</TableHeader>
-            <TableHeader>Customer</TableHeader>
-            <TableHeader>Event</TableHeader>
-            <TableHeader className="text-right">Amount</TableHeader>
+            {/* <TableHeader>id</TableHeader> */}
+            <TableHeader>Nome</TableHeader>
+            <TableHeader>Programa</TableHeader>
+            <TableHeader>Inicio-Fim</TableHeader>
+            <TableHeader className="text-right">Inicia em:</TableHeader>
           </TableRow>
         </TableHead>
         <TableBody>
           {orders.map((order) => (
-            <TableRow
-              key={order.id}
-              title={`Order #${order.id}`}
-            >
-              <TableCell>{order.id}</TableCell>
-              <TableCell className="text-zinc-500">{order.date}</TableCell>
+            <TableRow key={order.id} title={`Order #${order.id}`}>
+              {/* <TableCell>{order.id}</TableCell> */}
               <TableCell>{order.customer.name}</TableCell>
               <TableCell>
                 <div className="flex items-center gap-2">
@@ -88,7 +73,15 @@ export default function Home() {
                   <span>{order.event.name}</span>
                 </div>
               </TableCell>
-              <TableCell className="text-right">US{order.amount.usd}</TableCell>
+
+              <TableCell className="text-zinc-500">
+                <div className="inlin flex-col ">
+                  <p className="text-sm">{order.date}</p>
+                  <p className="text-sm">{order.date}</p>
+                </div>
+              </TableCell>
+
+              <TableCell className="text-right">19:39</TableCell>
             </TableRow>
           ))}
         </TableBody>

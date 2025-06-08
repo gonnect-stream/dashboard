@@ -1,77 +1,35 @@
-import clsx from 'clsx'
+const items = [
+  { id: 1, title: 'Back End Developer', department: 'Engineering', type: 'Full-time', location: 'Remote' },
+  { id: 2, title: 'Front End Developer', department: 'Engineering', type: 'Full-time', location: 'Remote' },
+  { id: 3, title: 'User Interface Designer', department: 'Design', type: 'Full-time', location: 'Remote' },
+]
 
-import { Button } from './button'
-
-export function Pagination({ 'aria-label': ariaLabel = 'Page navigation', className, ...props }) {
-  return <nav aria-label={ariaLabel} {...props} className={clsx(className, 'flex gap-x-2')} />
-}
-
-export function PaginationPrevious({ href = null, className, children = 'Previous' }) {
+export function Pagination() {
   return (
-    <span className={clsx(className, 'grow basis-0')}>
-      <Button {...(href === null ? { disabled: true } : { href })} plain aria-label="Previous page">
-        <svg className="stroke-current" data-slot="icon" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-          <path
-            d="M2.75 8H13.25M2.75 8L5.25 5.5M2.75 8L5.25 10.5"
-            strokeWidth={1.5}
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-        </svg>
-        {children}
-      </Button>
-    </span>
-  )
-}
-
-export function PaginationNext({ href = null, className, children = 'Next' }) {
-  return (
-    <span className={clsx(className, 'flex grow basis-0 justify-end')}>
-      <Button {...(href === null ? { disabled: true } : { href })} plain aria-label="Next page">
-        {children}
-        <svg className="stroke-current" data-slot="icon" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-          <path
-            d="M13.25 8L2.75 8M13.25 8L10.75 10.5M13.25 8L10.75 5.5"
-            strokeWidth={1.5}
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-        </svg>
-      </Button>
-    </span>
-  )
-}
-
-export function PaginationList({ className, ...props }) {
-  return <span {...props} className={clsx(className, 'hidden items-baseline gap-x-2 sm:flex')} />
-}
-
-export function PaginationPage({ href, className, current = false, children }) {
-  return (
-    <Button
-      href={href}
-      plain
-      aria-label={`Page ${children}`}
-      aria-current={current ? 'page' : undefined}
-      className={clsx(
-        className,
-        'min-w-9 before:absolute before:-inset-px before:rounded-lg',
-        current && 'before:bg-zinc-950/5 dark:before:bg-white/10'
-      )}
+    <nav
+      aria-label="Pagination"
+      className="flex items-center justify-between border-t border-zinc-600 px-4 py-5 sm:px-6"
     >
-      <span className="-mx-0.5">{children}</span>
-    </Button>
-  )
-}
-
-export function PaginationGap({ className, children = <>&hellip;</>, ...props }) {
-  return (
-    <span
-      aria-hidden="true"
-      {...props}
-      className={clsx(className, 'w-9 text-center text-sm/6 font-semibold text-zinc-950 select-none dark:text-white')}
-    >
-      {children}
-    </span>
+      <div className="hidden sm:block">
+        <p className="text-sm text-zinc-100">
+          Mostrando <span className="font-medium">1</span> até <span className="font-medium">10</span> de{' '}
+          <span className="font-medium">20</span> resultados
+        </p>
+      </div>
+      <div className="flex flex-1 justify-between sm:justify-end">
+        <a
+          href="#"
+          className="relative inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-gray-300 ring-inset hover:bg-gray-50 focus-visible:outline-offset-0"
+        >
+          Anterior
+        </a>
+        <a
+          href="#"
+          className="relative ml-3 inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-gray-300 ring-inset hover:bg-gray-50 focus-visible:outline-offset-0"
+        >
+          Próximo
+        </a>
+      </div>
+    </nav>
   )
 }
