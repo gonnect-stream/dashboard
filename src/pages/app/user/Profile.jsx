@@ -1,4 +1,3 @@
-import { Button } from "@/components/Button";
 import { Divider } from "@/components/divider";
 import { Label } from "@/components/fieldset";
 import { Heading, Subheading } from "@/components/heading";
@@ -124,13 +123,12 @@ export default function Profile() {
       <Divider className="my-10" soft />
 
       <div className="flex justify-end gap-4">
-        <Button
-          plain
-          className={"px-4 bg-zinc-700 cursor-pointer hover:bg-zinc-800"}
+        <button
+          className="inline-flex items-center justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-red-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600"
           type="submit"
         >
           Salvar alterações
-        </Button>
+        </button>
       </div>
     </form>
   );
