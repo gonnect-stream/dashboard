@@ -91,7 +91,7 @@ export default function Events() {
                   <Link>
                     <img
                       className="aspect-3/2 rounded-lg shadow-sm"
-                      src={event.imgUrl}
+                      src='https://imagedelivery.net/GuO0L33BtvtzXzLHgB9XsQ/831d5928-bbe1-4082-fe6a-d5f9e4036900/public'
                       alt=""
                     />
                   </Link>
