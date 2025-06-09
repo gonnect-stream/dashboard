@@ -72,8 +72,8 @@ export default function CreateEventModal({ isOpen, onClose }) {
       const timestamp = Date.now();
       const nomeFinal = `${nomeEventoSlug}-${timestamp}.jpg`;
 
-      const renamedFile = new File([imagemOriginal], nomeFinal, {
-        type: imagemOriginal.type,
+      const renamedFile = new File([formData.imagem], nomeFinal, {
+        type: formData.imagem.type,
       });
 
       const form = new FormData();
