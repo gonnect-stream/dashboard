@@ -42,8 +42,16 @@ import {
   PencilSquareIcon,
   TrashIcon,
   UserPlusIcon,
-  // ArrowLeftCircleIcon as ArrowLeftEndOnRectangleIcon,
+  SignalIcon,
+  StarIcon,
+  VideoCameraIcon,
+  ArrowsRightLeftIcon,
   ArrowRightEndOnRectangleIcon,
+  PlayCircleIcon,
+  UserIcon,
+  UsersIcon,
+  CloudArrowUpIcon,
+  ServerStackIcon
 } from "@heroicons/react/20/solid";
 
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
@@ -182,7 +190,7 @@ export default function ApplicationLayout({}) {
                     : "border-l-4 border-transparent hover:bg-gray-100/10 hover:text-white text-white/50 "
                 )}
               >
-                <HomeIcon className="h-5 w-5" />
+                <StarIcon className="h-5 w-5" />
                 <SidebarLabel className=" text-sm font-light">
                   Eventos
                 </SidebarLabel>
@@ -197,7 +205,7 @@ export default function ApplicationLayout({}) {
                     : "border-l-4 border-transparent hover:bg-gray-100/10 hover:text-white text-white/50 "
                 )}
               >
-                <HomeIcon className="h-5 w-5" />
+                <VideoCameraIcon className="h-5 w-5" />
                 <SidebarLabel className=" text-sm font-light">
                   Input Stream
                 </SidebarLabel>
@@ -212,7 +220,7 @@ export default function ApplicationLayout({}) {
                     : "border-l-4 border-transparent hover:bg-gray-100/10 hover:text-white text-white/50 "
                 )}
               >
-                <HomeIcon className="h-5 w-5" />
+                <ArrowsRightLeftIcon className="h-5 w-5" />
                 <SidebarLabel className=" text-sm font-light">
                   Restreams
                 </SidebarLabel>
@@ -227,7 +235,7 @@ export default function ApplicationLayout({}) {
                     : "border-l-4 border-transparent hover:bg-gray-100/10 hover:text-white text-white/50 "
                 )}
               >
-                <HomeIcon className="h-5 w-5" />
+                <PlayCircleIcon className="h-5 w-5" />
                 <SidebarLabel className=" text-sm font-light">
                   Video ON DEMAND
                 </SidebarLabel>
@@ -247,7 +255,7 @@ export default function ApplicationLayout({}) {
                     : "border-l-4 border-transparent hover:bg-gray-100/10 hover:text-white text-white/50 "
                 )}
               >
-                <HomeIcon className="h-5 w-5" />
+                <UserIcon className="h-5 w-5" />
                 <SidebarLabel className=" text-sm font-light">
                   Meu perfil
                 </SidebarLabel>
@@ -262,12 +270,49 @@ export default function ApplicationLayout({}) {
                     : "border-l-4 border-transparent hover:bg-gray-100/10 hover:text-white text-white/50 "
                 )}
               >
-                <HomeIcon className="h-5 w-5" />
+                <UsersIcon className="h-5 w-5" />
                 <SidebarLabel className=" text-sm font-light">
                   Usuários
                 </SidebarLabel>
               </Link>
             </SidebarSection>
+
+            
+            {/* Controle de sistemas */}
+            <SidebarSection>
+              <SidebarHeading>Sistemas</SidebarHeading>
+
+              <Link
+                to="/dashboard/Perfil"
+                className={clsx(
+                  "flex items-center  gap-3 hover:bg-gray-100/10 w-full pl-2 py-2 rounded-lg",
+                  location.pathname === "/dashboard/Perfil"
+                    ? "border-l-4 border-red-500 text-white"
+                    : "border-l-4 border-transparent hover:bg-gray-100/10 hover:text-white text-white/50 "
+                )}
+              >
+                <CloudArrowUpIcon className="h-5 w-5" />
+                <SidebarLabel className=" text-sm font-light">
+                  CDN
+                </SidebarLabel>
+              </Link>
+
+              <Link
+                to="/dashboard/usuarios"
+                className={clsx(
+                  "flex items-center  gap-3 hover:bg-gray-100/10 w-full pl-2 py-2 rounded-lg",
+                  location.pathname === "/dashboard/usuarios"
+                    ? "border-l-4 border-red-500 text-white"
+                    : "border-l-4 border-transparent hover:bg-gray-100/10 hover:text-white text-white/50 "
+                )}
+              >
+                <ServerStackIcon className="h-5 w-5" />
+                <SidebarLabel className=" text-sm font-light">
+                  Servidores
+                </SidebarLabel>
+              </Link>
+            </SidebarSection>
+
           </SidebarBody>
 
           {/* SIDEBAR FOOTER */}
