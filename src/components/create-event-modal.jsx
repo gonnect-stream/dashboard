@@ -61,73 +61,6 @@ export default function CreateEventModal({ isOpen, onClose }) {
     }
   };
 
-  //   const handleSubmit = async (e) => {
-  //     e.preventDefault();
-  //     setLoading(true);
-  //     setMessage(null);
-  //     console.log(formData);
-  //     // console.log(preview);
-
-  //     try {
-  //       // Validação simples
-  //       if (
-  //         !formData.nome ||
-  //         !formData.cidade ||
-  //         !formData.estado ||
-  //         !formData.data ||
-  //         !formData.hora ||
-  //         !formData.imagem
-  //       ) {
-  //         throw new Error("Preencha todos os campos obrigatórios");
-  //       }
-
-  //       // Upload para Cloudflare Images
-  //       const form = new FormData();
-  //       form.append("file", formData.imagem);
-
-  //       const cloudflareRes = await axios.post(
-  //         "https://api.cloudflare.com/client/v4/accounts/a7f4e1627ff1e95968d0281fa866eb92/images/v1",
-  //         form,
-  //         {
-  //           headers: {
-  //             Authorization: "Bearer q4djMLMyr9iIPVbbPy8xbD6JiohLm4sD",
-  //           },
-  //         }
-  //       );
-
-  //       const thumbUrl =
-  //         cloudflareRes.data.result.variants?.[0] ||
-  //         cloudflareRes.data.result.url;
-
-  //       // Inserção no Supabase
-  //       const { error } = await supabase.from("eventos").insert({
-  //         nome: formData.nome,
-  //         data: formData.data,
-  //         hora: formData.hora,
-  //         descricao: formData.descricao,
-  //         thumbUrl,
-  //       });
-
-  //       if (error) throw error;
-
-  //       setMessage("Evento criado com sucesso!");
-  //       setFormData({
-  //         nome: "",
-  //         data: "",
-  //         hora: "",
-  //         descricao: "",
-  //         imagem: null,
-  //       });
-  //       setPreview(null);
-  //       onClose(); // opcional: pode comentar se quiser manter aberto
-  //     } catch (err) {
-  //       console.error(err);
-  //       setMessage(err.message || "Erro ao criar evento.");
-  //     } finally {
-  //       setLoading(false);
-  //     }
-  //   };
-
   const handleSubmit = async () => {
     setLoading(true);
     setMessage("");
@@ -155,11 +88,12 @@ export default function CreateEventModal({ isOpen, onClose }) {
 
       const { error } = await supabase.from("eventos").insert({
         nome: formData.nome,
-        nome: formData.cidade,
+        cidade: formData.cidade,
+        estado: formData.estado,
         data: formData.data,
         hora: formData.hora,
+        status: formData.status,
         descricao: formData.descricao,
-        estado: formData.estado,
         thumbUrl,
       });
 
@@ -168,6 +102,8 @@ export default function CreateEventModal({ isOpen, onClose }) {
       setMessage("✅ Evento criado com sucesso!");
       setFormData({
         nome: "",
+        cidade: "",
+        estado: "",
         data: "",
         hora: "",
         descricao: "",
