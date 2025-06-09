@@ -133,55 +133,57 @@ export default function CreateEventModal({ isOpen, onClose }) {
     setMessage("");
 
     try {
-  if (!formData.imagem) throw new Error("Imagem obrigatória.");
+      if (!formData.imagem) throw new Error("Imagem obrigatória.");
 
-  const form = new FormData();
-  form.append("file", formData.imagem);
+      const form = new FormData();
+      form.append("file", formData.imagem);
 
-  const uploadRes = await axios.post(
-    "https://backend-production-5486.up.railway.app/api/upload",
-    form,
-    {
-      withCredentials: true, // se usar cookies no backend
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
+      const uploadRes = await axios.post(
+        "https://backend-production-5486.up.railway.app/api/upload",
+        form,
+        {
+          withCredentials: true, // se usar cookies no backend
+          headers: {
+            "Content-Type": "multipart/form-data", // opcional, axios define automaticamente
+          },
+        }
+      );
+
+      const thumbUrl = uploadRes.data?.thumbUrl;
+      if (!thumbUrl) throw new Error("URL da imagem não retornada.");
+
+      const { error } = await supabase.from("eventos").insert({
+        nome: formData.nome,
+        data: formData.data,
+        hora: formData.hora,
+        descricao: formData.descricao,
+        estado: formData.estado,
+        thumbUrl,
+      });
+
+      if (error) throw new Error(error.message);
+
+      setMessage("✅ Evento criado com sucesso!");
+      setFormData({
+        nome: "",
+        data: "",
+        hora: "",
+        descricao: "",
+        estado: "",
+        imagem: null,
+      });
+      setPreview(null);
+    } catch (err) {
+      const backendError =
+        err.response?.data?.details || err.response?.data?.error || err.message;
+
+      console.error("❌ Erro no processo:", err);
+      alert(`Erro ao criar evento: ${backendError}`);
+      setMessage(`Erro: ${backendError}`);
+    } finally {
+      setLoading(false);
     }
-  );
-
-  const thumbUrl = uploadRes.data.thumbUrl;
-  if (!thumbUrl) throw new Error("Imagem não foi enviada corretamente.");
-
-  const { error } = await supabase.from("eventos").insert({
-    nome: formData.nome,
-    data: formData.data,
-    hora: formData.hora,
-    descricao: formData.descricao,
-    estado: formData.estado,
-    thumbUrl,
-  });
-
-  if (error) throw new Error(error.message);
-
-  setMessage("Evento criado com sucesso!");
-  setFormData({
-    nome: "",
-    data: "",
-    hora: "",
-    descricao: "",
-    estado: "",
-    imagem: null,
-  });
-  setPreview(null);
-} catch (err) {
-  const backendError = err.response?.data?.details || err.response?.data?.error || err.message;
-
-  console.error("Erro detalhado:", err);
-  alert(`Erro ao criar evento: ${backendError}`);
-  setMessage(`Erro: ${backendError}`);
-} finally {
-  setLoading(false);
-}
+  };
 
   return (
     <Dialog open={isOpen} onClose={onClose} className="relative z-50">
