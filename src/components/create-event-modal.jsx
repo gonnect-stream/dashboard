@@ -70,6 +70,7 @@ export default function CreateEventModal({ isOpen, onClose }) {
 
       const form = new FormData();
       form.append("file", formData.imagem);
+      form.append("name", `thumbs/${formData.nome}`);
 
       const uploadRes = await axios.post(
         "https://backend-production-5486.up.railway.app/api/upload",
