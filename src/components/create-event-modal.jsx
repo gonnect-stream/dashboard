@@ -79,13 +79,13 @@ export default function CreateEventModal({ isOpen, onClose }) {
       const form = new FormData();
       form.append("file", renamedFile);
       form.append("customName", nomeFinal);
-      form.append(
-        "metadata",
-        JSON.stringify({
-          name: "abc123",
-          userId: "u456",
-        })
-      );
+      // form.append(
+      //   "metadata",
+      //   JSON.stringify({
+      //     name: "abc123",
+      //     userId: "u456",
+      //   })
+      // );
 
       const uploadRes = await axios.post(
         "https://backend-production-5486.up.railway.app/api/upload",
