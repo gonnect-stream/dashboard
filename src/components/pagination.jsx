@@ -4,7 +4,7 @@ const items = [
   { id: 3, title: 'User Interface Designer', department: 'Design', type: 'Full-time', location: 'Remote' },
 ]
 
-export function Pagination() {
+export function Pagination({total}) {
   return (
     <nav
       aria-label="Pagination"
@@ -13,7 +13,7 @@ export function Pagination() {
       <div className="hidden sm:block">
         <p className="text-sm text-zinc-100">
           Mostrando <span className="font-medium">1</span> até <span className="font-medium">10</span> de{' '}
-          <span className="font-medium">20</span> resultados
+          <span className="font-medium">{total}</span> resultados
         </p>
       </div>
       <div className="flex flex-1 justify-between sm:justify-end">

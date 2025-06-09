@@ -114,9 +114,9 @@ export default function CreateEventModal({ isOpen, onClose }) {
         cidade: "",
         estado: "",
         data: "",
+        status: "Programado",
         hora: "",
         descricao: "",
-        estado: "",
         imagem: null,
       });
       setPreview(null);
@@ -337,7 +337,9 @@ export default function CreateEventModal({ isOpen, onClose }) {
             </div>
 
             <div className="mt-6 flex items-center justify-end gap-x-6">
-              <button className="text-sm/6 font-semibold text-zinc-100">
+              <button 
+                onClick={onClose}
+              className="text-sm/6 font-semibold text-zinc-100">
                 Cancelar
               </button>
               <button
