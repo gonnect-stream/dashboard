@@ -70,7 +70,7 @@ export default function CreateEventModal({ isOpen, onClose }) {
 
       const nomeEventoSlug = formData.nome;
       const timestamp = Date.now();
-      const nomeFinal = `/thumbs/${nomeEventoSlug}-timestamp:${timestamp}.${formData.imagem.type}`;
+      const nomeFinal = `/thumbs/${nomeEventoSlug}-timestamp:${timestamp}`;
 
       const renamedFile = new File([formData.imagem], nomeFinal, {
         type: formData.imagem.type,
