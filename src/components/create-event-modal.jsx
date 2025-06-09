@@ -61,121 +61,123 @@ export default function CreateEventModal({ isOpen, onClose }) {
     }
   };
 
-//   const handleSubmit = async (e) => {
-//     e.preventDefault();
-//     setLoading(true);
-//     setMessage(null);
-//     console.log(formData);
-//     // console.log(preview);
+  //   const handleSubmit = async (e) => {
+  //     e.preventDefault();
+  //     setLoading(true);
+  //     setMessage(null);
+  //     console.log(formData);
+  //     // console.log(preview);
 
-//     try {
-//       // Validação simples
-//       if (
-//         !formData.nome ||
-//         !formData.cidade ||
-//         !formData.estado ||
-//         !formData.data ||
-//         !formData.hora ||
-//         !formData.imagem
-//       ) {
-//         throw new Error("Preencha todos os campos obrigatórios");
-//       }
+  //     try {
+  //       // Validação simples
+  //       if (
+  //         !formData.nome ||
+  //         !formData.cidade ||
+  //         !formData.estado ||
+  //         !formData.data ||
+  //         !formData.hora ||
+  //         !formData.imagem
+  //       ) {
+  //         throw new Error("Preencha todos os campos obrigatórios");
+  //       }
 
-//       // Upload para Cloudflare Images
-//       const form = new FormData();
-//       form.append("file", formData.imagem);
+  //       // Upload para Cloudflare Images
+  //       const form = new FormData();
+  //       form.append("file", formData.imagem);
 
-//       const cloudflareRes = await axios.post(
-//         "https://api.cloudflare.com/client/v4/accounts/a7f4e1627ff1e95968d0281fa866eb92/images/v1",
-//         form,
-//         {
-//           headers: {
-//             Authorization: "Bearer q4djMLMyr9iIPVbbPy8xbD6JiohLm4sD",
-//           },
-//         }
-//       );
+  //       const cloudflareRes = await axios.post(
+  //         "https://api.cloudflare.com/client/v4/accounts/a7f4e1627ff1e95968d0281fa866eb92/images/v1",
+  //         form,
+  //         {
+  //           headers: {
+  //             Authorization: "Bearer q4djMLMyr9iIPVbbPy8xbD6JiohLm4sD",
+  //           },
+  //         }
+  //       );
 
-//       const thumbUrl =
-//         cloudflareRes.data.result.variants?.[0] ||
-//         cloudflareRes.data.result.url;
+  //       const thumbUrl =
+  //         cloudflareRes.data.result.variants?.[0] ||
+  //         cloudflareRes.data.result.url;
 
-//       // Inserção no Supabase
-//       const { error } = await supabase.from("eventos").insert({
-//         nome: formData.nome,
-//         data: formData.data,
-//         hora: formData.hora,
-//         descricao: formData.descricao,
-//         thumbUrl,
-//       });
+  //       // Inserção no Supabase
+  //       const { error } = await supabase.from("eventos").insert({
+  //         nome: formData.nome,
+  //         data: formData.data,
+  //         hora: formData.hora,
+  //         descricao: formData.descricao,
+  //         thumbUrl,
+  //       });
 
-//       if (error) throw error;
+  //       if (error) throw error;
 
-//       setMessage("Evento criado com sucesso!");
-//       setFormData({
-//         nome: "",
-//         data: "",
-//         hora: "",
-//         descricao: "",
-//         imagem: null,
-//       });
-//       setPreview(null);
-//       onClose(); // opcional: pode comentar se quiser manter aberto
-//     } catch (err) {
-//       console.error(err);
-//       setMessage(err.message || "Erro ao criar evento.");
-//     } finally {
-//       setLoading(false);
-//     }
-//   };
+  //       setMessage("Evento criado com sucesso!");
+  //       setFormData({
+  //         nome: "",
+  //         data: "",
+  //         hora: "",
+  //         descricao: "",
+  //         imagem: null,
+  //       });
+  //       setPreview(null);
+  //       onClose(); // opcional: pode comentar se quiser manter aberto
+  //     } catch (err) {
+  //       console.error(err);
+  //       setMessage(err.message || "Erro ao criar evento.");
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   };
 
-const handleSubmit = async () => {
-    setLoading(true)
-    setMessage('')
+  const handleSubmit = async () => {
+    setLoading(true);
+    setMessage("");
 
     try {
-      if (!formData.imagem) throw new Error('Imagem obrigatória.')
+      if (!formData.imagem) throw new Error("Imagem obrigatória.");
 
       // 1. Upload da imagem para backend (que envia ao Cloudflare)
-      const form = new FormData()
-      form.append('file', formData.imagem)
+      const form = new FormData();
+      form.append("file", formData.imagem);
 
       const uploadRes = await axios.post(
-        'https://backend-production-5486.up.railway.app/api/upload',
+        "https://backend-production-5486.up.railway.app/api/upload",
         form,
         { withCredentials: true } // se estiver usando cookies
-      )
+      );
 
-      const thumbUrl = uploadRes.data.thumbUrl
+      const thumbUrl = uploadRes.data.thumbUrl;
 
       // 2. Salvar dados no Supabase
-      const { error } = await supabase.from('eventos').insert({
+      const { error } = await supabase.from("eventos").insert({
         nome: formData.nome,
         data: formData.data,
         hora: formData.hora,
         descricao: formData.descricao,
         estado: formData.estado,
         thumbUrl,
-      })
+      });
 
-      if (error) throw error
+      if (error) throw error;
 
-      setMensagem('Evento criado com sucesso!')
+      setMensage("Evento criado com sucesso!");
       setFormData({
-        nome: '',
-        data: '',
-        hora: '',
-        descricao: '',
-        estado: '',
+        nome: "",
+        data: "",
+        hora: "",
+        descricao: "",
+        estado: "",
         imagem: null,
-      })
-      setPreview(null)
+      });
+      setPreview(null);
     } catch (err) {
-      console.error(err)
-      setMensagem(err.message || 'Erro ao criar evento.')
+      console.error(err);
+      setMensage(err.message || "Erro ao criar evento.");
+      console.error("Erro no upload:", err.response?.data || err.message);
+      alert(`Erro: ${err.response?.data?.details || err.message}`);
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
-  }
+  };
 
   return (
     <Dialog open={isOpen} onClose={onClose} className="relative z-50">
