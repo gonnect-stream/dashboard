@@ -8,7 +8,7 @@ import {
 
 import { Divider } from "@/components/divider";
 import { Link } from "react-router-dom";
-import { Pagination } from "@/components/pagination";
+// import { Pagination } from "@/components/pagination";
 
 const people = [
   {
@@ -165,7 +165,7 @@ export default function Users() {
         ))}
       </ul>
 
-      <Pagination />
+      {/* <Pagination /> */}
     </section>
   );
 }

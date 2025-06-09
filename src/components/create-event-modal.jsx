@@ -35,7 +35,7 @@ const estados = [
   { nome: "Tocantins", sigla: "TO" },
 ];
 
-export default function CreateEventModal({ isOpen, onClose }) {
+export default function CreateEventModal({ isOpen, onClose, onSuccess }) {
   const [formData, setFormData] = useState({
     nome: "",
     cidade: "",
@@ -46,6 +46,7 @@ export default function CreateEventModal({ isOpen, onClose }) {
     descricao: "",
     imagem: null,
   });
+
   const [preview, setPreview] = useState(null);
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState(null);
@@ -61,13 +62,20 @@ export default function CreateEventModal({ isOpen, onClose }) {
     }
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
     setLoading(true);
     setMessage("");
 
+    if (!formData.imagem) {
+      setLoading(false);
+      setMessage(`Erro: É obrigatório o uso da imagem`);
+      return;
+    }
+
     try {
       if (!formData.imagem) throw new Error("Imagem obrigatória.");
-
       const nomeEventoSlug = formData.nome;
       const timestamp = Date.now();
       const nomeFinal = `/thumbs/${nomeEventoSlug}-timestamp:${timestamp}`;
@@ -120,6 +128,8 @@ export default function CreateEventModal({ isOpen, onClose }) {
         imagem: null,
       });
       setPreview(null);
+      onSuccess();
+      onClose();
     } catch (err) {
       const backendError =
         err.response?.data?.details || err.response?.data?.error || err.message;
@@ -130,7 +140,6 @@ export default function CreateEventModal({ isOpen, onClose }) {
           ? JSON.stringify(backendError)
           : backendError;
 
-      alert(`Erro ao criar evento: ${msg}`);
       setMessage(`Erro: ${msg}`);
     } finally {
       setLoading(false);
@@ -186,7 +195,7 @@ export default function CreateEventModal({ isOpen, onClose }) {
                           type="file"
                           accept="image/*"
                           onChange={handleChange}
-                          className="text-white bg-zinc-600 rounded-md pr-2 mt-4"
+                          className="text-white bg-zinc-600 rounded-md pr-2 mt-4 mb-5"
                         />
 
                         {message && (
@@ -337,9 +346,10 @@ export default function CreateEventModal({ isOpen, onClose }) {
             </div>
 
             <div className="mt-6 flex items-center justify-end gap-x-6">
-              <button 
+              <button
                 onClick={onClose}
-              className="text-sm/6 font-semibold text-zinc-100">
+                className="text-sm/6 font-semibold text-zinc-100"
+              >
                 Cancelar
               </button>
               <button

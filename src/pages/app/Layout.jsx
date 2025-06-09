@@ -51,7 +51,7 @@ import {
   UserIcon,
   UsersIcon,
   CloudArrowUpIcon,
-  ServerStackIcon
+  ServerStackIcon,
 } from "@heroicons/react/20/solid";
 
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
@@ -182,7 +182,7 @@ export default function ApplicationLayout({}) {
               <SidebarHeading>Controle de eventos</SidebarHeading>
 
               <Link
-                to="/dashboard/eventos"
+                to="/dashboard/eventos?status=todos&page=1"
                 className={clsx(
                   "flex items-center  gap-3 hover:bg-gray-100/10 w-full pl-2 py-2 rounded-lg",
                   location.pathname === "/dashboard/eventos"
@@ -277,7 +277,6 @@ export default function ApplicationLayout({}) {
               </Link>
             </SidebarSection>
 
-            
             {/* Controle de sistemas */}
             <SidebarSection>
               <SidebarHeading>Sistemas</SidebarHeading>
@@ -292,9 +291,7 @@ export default function ApplicationLayout({}) {
                 )}
               >
                 <CloudArrowUpIcon className="h-5 w-5" />
-                <SidebarLabel className=" text-sm font-light">
-                  CDN
-                </SidebarLabel>
+                <SidebarLabel className=" text-sm font-light">CDN</SidebarLabel>
               </Link>
 
               <Link
@@ -312,7 +309,6 @@ export default function ApplicationLayout({}) {
                 </SidebarLabel>
               </Link>
             </SidebarSection>
-
           </SidebarBody>
 
           {/* SIDEBAR FOOTER */}

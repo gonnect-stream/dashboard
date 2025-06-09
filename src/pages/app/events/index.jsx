@@ -8,17 +8,17 @@ import {
   DropdownMenu,
 } from "@/components/dropdown";
 import { Heading } from "@/components/heading";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { Select } from "@headlessui/react";
 import { Button } from "@headlessui/react";
 import { Input } from "@headlessui/react";
 
 import { EllipsisVerticalIcon } from "@heroicons/react/16/solid";
 
-// import { geteventos } from "@/data";
 import CreateEventModal from "@/components/create-event-modal";
 import ConfirmDeleteModal from "@/components/confirm-delete-modal";
-import { Pagination } from "@/components/pagination";
+import Paginacao from "../../../components/paginacao";
+
 import axios from "axios";
 
 export default function Events() {
@@ -29,16 +29,32 @@ export default function Events() {
     useState(false);
   const [eventoSelecionado, setEventoSelecionado] = useState(null);
 
+  const [totalPaginas, setTotalPaginas] = useState(1);
+
+  //FILTRO STATUS
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const statusFiltro = searchParams.get("status") || "todos"; // ✅ declare antes
+  const rawPage = searchParams.get("page");
+  const paginaAtual = Number.isNaN(Number(rawPage)) ? 1 : Number(rawPage);
+
   const fetchEventos = useCallback(async () => {
+    const params = new URLSearchParams();
+    params.set("status", statusFiltro);
+    params.set("page", paginaAtual);
+    params.set("limit", 5);
+
     try {
       const res = await axios.get(
-        "https://backend-production-5486.up.railway.app/api/eventos"
+        `http://localhost:3000/api/eventos?${params.toString()}`
       );
-      setEventos(res.data);
+
+      setEventos(res.data.eventos);
+      setTotalPaginas(res.data.totalPaginas);
     } catch (err) {
-      console.error("Erro ao buscar eventos:", err);
+      console.error("❌ Erro ao buscar eventos:", err);
     }
-  }, []);
+  }, [searchParams]);
 
   // 🔃 Executa ao montar o componente
   useEffect(() => {
@@ -68,7 +84,7 @@ export default function Events() {
   };
 
   if (erro) return <div>{erro}</div>;
-  if (!eventos.length) return <div>Carregando todos os eventos...</div>;
+  // if (!eventos.length) return <div>Carregando todos os eventos...</div>;
 
   return (
     <>
@@ -88,16 +104,19 @@ export default function Events() {
             </div>
             <div>
               <Select
-                className={
-                  "w-full b text-sm bg-zinc-800 border border-zinc-500 border-0.5 text-zinc-400 px-5 py-2  rounded-lg focus:outline-none focus:ring-0 focus:border-transparent"
-                }
+                className="w-full text-sm bg-zinc-800 border border-zinc-500 text-zinc-400 px-5 py-2 rounded-lg focus:outline-none"
+                value={statusFiltro}
+                onChange={(e) => {
+                  setSearchParams({
+                    status: e.target.value,
+                    page: 1, // reseta para primeira página ao mudar status
+                  });
+                }}
               >
-                <option value="*" disabled>
-                  Selecionar
-                </option>
-                <option value="name">No ar</option>
-                <option value="date">Próximos</option>
-                <option value="status">Finalizado</option>
+                <option value="todos">Todos</option>
+                <option value="programado">Programado</option>
+                <option value="aovivo">Ao vivo</option>
+                <option value="finalizado">Finalizado</option>
               </Select>
             </div>
           </div>
@@ -120,7 +139,7 @@ export default function Events() {
                   <Link>
                     <img
                       className="aspect-3/2 rounded-lg shadow-sm"
-                      src="https://imagedelivery.net/GuO0L33BtvtzXzLHgB9XsQ/831d5928-bbe1-4082-fe6a-d5f9e4036900/public"
+                      src={event.thumbUrl}
                       alt=""
                     />
                   </Link>
@@ -136,23 +155,22 @@ export default function Events() {
                     <span aria-hidden="true">·</span> {event.cidade}/
                     {event.estado}
                   </div>
-                  <div className="text-xs/6 text-zinc-600">
-                    {event.descricao}
-                  </div>
                 </div>
               </div>
               <div className="flex items-center gap-4">
                 <Badge
-                  className="max-sm:hidden"
+                  className="max-sm:hidden py-2 px-3"
                   color={
-                    event.status === "No ar"
+                    event.status === "aovivo"
                       ? "lime"
-                      : event.status === "Programado"
+                      : event.status === "programado"
                       ? "yellow"
                       : "red"
                   }
                 >
-                  {event.status}
+                  {event.status === "aovivo" ? "AO VIVO" : ""}
+                  {event.status === "programado" ? "PROGRAMADO" : ""}
+                  {event.status === "finalizado" ? "FINALIZADO" : ""}
                 </Badge>
 
                 <Dropdown>
@@ -180,7 +198,7 @@ export default function Events() {
         ))}
       </ul>
 
-      <Pagination total={eventos.length} />
+      <Paginacao totalPaginas={totalPaginas} />
 
       <ConfirmDeleteModal
         isOpen={modalAbertoConfirmDelete}
@@ -191,6 +209,7 @@ export default function Events() {
       <CreateEventModal
         isOpen={isModalOpenCreateEvent}
         onClose={() => setIsModalOpenCreateEvent(false)}
+        onSuccess={fetchEventos}
       />
     </>
   );
