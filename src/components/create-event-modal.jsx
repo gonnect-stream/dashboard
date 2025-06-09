@@ -178,8 +178,13 @@ export default function CreateEventModal({ isOpen, onClose }) {
         err.response?.data?.details || err.response?.data?.error || err.message;
 
       console.error("❌ Erro no processo:", err);
-      alert(`Erro ao criar evento: ${backendError}`);
-      setMessage(`Erro: ${backendError}`);
+      const msg =
+        typeof backendError === "object"
+          ? JSON.stringify(backendError)
+          : backendError;
+
+      alert(`Erro ao criar evento: ${msg}`);
+      setMessage(`Erro: ${msg}`);
     } finally {
       setLoading(false);
     }
