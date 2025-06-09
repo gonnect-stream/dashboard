@@ -68,9 +68,24 @@ export default function CreateEventModal({ isOpen, onClose }) {
     try {
       if (!formData.imagem) throw new Error("Imagem obrigatória.");
 
+      const nomeEventoSlug = formData.nome;
+      const timestamp = Date.now();
+      const nomeFinal = `${nomeEventoSlug}-${timestamp}.jpg`;
+
+      const renamedFile = new File([imagemOriginal], nomeFinal, {
+        type: imagemOriginal.type,
+      });
+
       const form = new FormData();
-      form.append("file", formData.imagem);
-      form.append("nome", `thumbs/${formData.nome}`);
+      form.append("file", renamedFile);
+      form.append("customName", nomeFinal);
+      form.append(
+        "metadata",
+        JSON.stringify({
+          name: "abc123",
+          userId: "u456",
+        })
+      );
 
       const uploadRes = await axios.post(
         "https://backend-production-5486.up.railway.app/api/upload",
