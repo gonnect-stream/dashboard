@@ -140,6 +140,7 @@ export default function CreateEventModal({ isOpen, onClose }) {
 
       const uploadRes = await axios.post(
         "https://backend-production-5486.up.railway.app/api/upload",
+        // "http://localhost:3000/api/upload",
         form,
         {
           withCredentials: true, // se usar cookies no backend
@@ -154,6 +155,7 @@ export default function CreateEventModal({ isOpen, onClose }) {
 
       const { error } = await supabase.from("eventos").insert({
         nome: formData.nome,
+        nome: formData.cidade,
         data: formData.data,
         hora: formData.hora,
         descricao: formData.descricao,
