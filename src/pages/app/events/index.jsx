@@ -46,7 +46,7 @@ export default function Events() {
 
     try {
       const res = await axios.get(
-        `http://localhost:3000/api/eventos?${params.toString()}`
+        `https://backend-production-5486.up.railway.app/api/eventos?${params.toString()}`
       );
 
       setEventos(res.data.eventos);

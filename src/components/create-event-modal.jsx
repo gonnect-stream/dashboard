@@ -90,7 +90,6 @@ export default function CreateEventModal({ isOpen, onClose, onSuccess }) {
 
       const uploadRes = await axios.post(
         "https://backend-production-5486.up.railway.app/api/upload",
-        // "http://localhost:3000/api/upload",
         form,
         {
           withCredentials: true, // se usar cookies no backend
