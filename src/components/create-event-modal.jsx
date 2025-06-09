@@ -70,7 +70,7 @@ export default function CreateEventModal({ isOpen, onClose }) {
 
       const nomeEventoSlug = formData.nome;
       const timestamp = Date.now();
-      const nomeFinal = `${nomeEventoSlug}-${timestamp}.jpg`;
+      const nomeFinal = `/thumbs/${nomeEventoSlug}-timestamp:${timestamp}.${formData.imagem.type}`;
 
       const renamedFile = new File([formData.imagem], nomeFinal, {
         type: formData.imagem.type,
@@ -79,13 +79,6 @@ export default function CreateEventModal({ isOpen, onClose }) {
       const form = new FormData();
       form.append("file", renamedFile);
       form.append("customName", nomeFinal);
-      // form.append(
-      //   "metadata",
-      //   JSON.stringify({
-      //     name: "abc123",
-      //     userId: "u456",
-      //   })
-      // );
 
       const uploadRes = await axios.post(
         "https://backend-production-5486.up.railway.app/api/upload",
